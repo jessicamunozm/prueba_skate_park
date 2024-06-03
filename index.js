@@ -33,6 +33,6 @@ engine ({
     layoutsDir: path.join(__dirname, 'views/layouts'),
 })
 
-app.use(express.urlencoded({extended: false}))  
+app.use(express.urlencoded ({ extended: true }))
 
 app.listen(PORT, () => console.log(`Server running on port http://localhost:${PORT}`))

@@ -1,14 +1,9 @@
-import express from "express";
+import express from 'express'
+import { addSkaterController, getSkatersController } from '../controllers/controllers.js'
 
-import {homeController, loginController, registroController, addSkaterController, getSkaterController, skaterLoginController} from "../controllers/controllers.js"
+const router = express.Router()
 
-const router = express.Router();
-
-router.get('/', getSkaterController)
-router.get('/registro', registroController)
-router.post('/skaters', addSkaterController)
-router.get('/login', skaterLoginController)
-//router.get('/skaters', getSkaterController)
-
+router.get("/", getSkatersController)
+router.post("/skaters", addSkaterController)
 
 export default router
