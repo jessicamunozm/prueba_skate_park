@@ -1,6 +1,13 @@
-import path from "path";
-import {addSkaterQuery, getSkatersQuery, getSkaterQuery, deleteSkaterQuery, editSkaterQuery, updateSkater} from "../queries/queries.js";
+import path from "path"
 import jwt from "jsonwebtoken"
+import {
+  addSkaterQuery, 
+  getSkatersQuery, 
+  getSkaterQuery, 
+  deleteSkaterQuery, 
+  editSkaterQuery, 
+  updateSkaterStatusQuery} from "../queries/queries.js";
+
 const __dirname = path.resolve()
 
 const homeController = async(req,res)=>{
@@ -43,7 +50,7 @@ const getSkaterController = async (req, res) => {
   try {
     const {email, password} = req.body
     const result = await getSkaterQuery(email, password)
-    const secretKey = process.env.SECRET_KEY
+    const secretKey = process.env.secretKey
     const token = jwt.sign(result, secretKey, {expiresIn:'1m'})
     res.status(200).send(token)
   } catch (error) {res.status(500).send(error.message)}}
@@ -75,16 +82,14 @@ const adminController = async (reg, res) => {
   console.log(skaters)
   res.render("Admin", { skaters })}
       
-const updateSkaterController = async (req, res) => {
+const updateStatusSkaterController = async (req, res) => {
   try {
     const id = req.params.id
     const {estado} = req.body
-    const result = await editSkaterStatus(id,estado)
+    const result = await updateSkaterStatusQuery(id,estado)
     res.status(200).send(result)
   } catch (error) {
     res.status(500).send(error)}}
-
-
 
 export {
   homeController,
@@ -98,5 +103,5 @@ export {
   editSkaterController,
   tokenController,
   adminController,
-  updateSkaterController
+  updateStatusSkaterController
   }

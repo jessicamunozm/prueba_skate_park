@@ -1,8 +1,6 @@
 import express from 'express'
 import { 
-    // homeController,
     loginController,
-    // profileController,
     registerController,
     addSkaterController, 
     getSkatersController, 
@@ -11,23 +9,23 @@ import {
     editSkaterController,
     tokenController,
     adminController,
-    updateSkaterController
+    updateStatusSkaterController    
 } from '../controllers/controllers.js'
 
 const router = express.Router()
 
-//página principal, muestra a participantes registrados
 router.get("/", getSkatersController)
-
-router.delete('/skaters/:id', deleteSkaterController)
-router.post("/login", getSkaterController)
-router.post("/skaters", addSkaterController)
-router.put('/skaters', editSkaterController)
-router.put("/skaters/status/:id", updateSkaterController)
-router.get("/admin", adminController)
-
-router.get("/Perfil", tokenController)
 router.get("/login", loginController)
 router.get("/registro", registerController)
+
+router.post("/skaters", addSkaterController)
+router.post("/login", getSkaterController)
+router.delete('/skaters/:id', deleteSkaterController)
+router.put('/skaters', editSkaterController)
+
+router.put("/skaters/status/:id", updateStatusSkaterController)
+
+router.get("/admin", adminController)
+router.get("/Perfil", tokenController)
 
 export default router

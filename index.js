@@ -1,3 +1,5 @@
+// --> QUEDA PENDIENTE CORREGIR PROBLEMA AL ACTUALIZAR PARTICIPANTE DESDE SU PROPIO PERFIL <--
+
 import express from "express"
 import router from "./router/router.js"
 import { engine } from "express-handlebars"

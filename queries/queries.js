@@ -53,15 +53,14 @@ const deleteSkaterQuery = async (id) => {
       return result.rows[0]
     } catch (error) {console.log(error)}}
 
-const updateSkater = async (id,estado) => {
-  console.log(`id en queries ${id}`)
+const updateSkaterStatusQuery = async (id,estado) => {
   const consulta = {
-      text:`update skaters set estado = $2 where id = $1 returning *`,
-      values:[id,estado],
+    text:`update skaters set estado = $2 where id = $1 returning *`,
+    values:[id,estado]
       }
       try {
       const result = await pool.query(consulta)
       return result.rows[0]
     } catch (error) {console.log(error)}}
 
-export {addSkaterQuery, getSkatersQuery, getSkaterQuery, deleteSkaterQuery, editSkaterQuery, updateSkater}
+export {addSkaterQuery, getSkatersQuery, getSkaterQuery, deleteSkaterQuery, editSkaterQuery, updateSkaterStatusQuery}
