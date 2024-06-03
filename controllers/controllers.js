@@ -1,7 +1,23 @@
 import path from "path";
-import {addSkaterQuery, getSkatersQuery, getSkaterQuery, deleteSkaterQuery, editSkaterQuery} from "../queries/queries.js";
+import {addSkaterQuery, getSkatersQuery, getSkaterQuery, deleteSkaterQuery, editSkaterQuery, updateSkater} from "../queries/queries.js";
 import jwt from "jsonwebtoken"
 const __dirname = path.resolve()
+
+const homeController = async(req,res)=>{
+  res.render("Home", {
+      title: "skaters",
+      skaters:[]})}
+
+const loginController = async(req,res)=>{
+  res.render('Login')}
+
+const profileController = async (reg,res)=>{
+  res.render("Perfil")
+  }
+
+const registerController = async (reg,res)=>{
+  res.render("Registro")
+}
 
 const addSkaterController = async (req, res) => {
   const {email, nombre, password, anos_experiencia, especialidad} = req.body
@@ -54,11 +70,33 @@ const editSkaterController = async (req, res) => {
      if (err) {console.log(err);
     } res.render("Perfil", {skater})})}
   
+const adminController = async (reg, res) => {
+  const skaters = await getSkatersQuery()
+  console.log(skaters)
+  res.render("Admin", { skaters })}
+      
+const updateSkaterController = async (req, res) => {
+  try {
+    const id = req.params.id
+    const {estado} = req.body
+    const result = await editSkaterStatus(id,estado)
+    res.status(200).send(result)
+  } catch (error) {
+    res.status(500).send(error)}}
+
+
 
 export {
+  homeController,
+  loginController,
+  profileController,
+  registerController,
   addSkaterController, 
   getSkatersController, 
   getSkaterController, 
   deleteSkaterController, 
   editSkaterController,
-  tokenController}
+  tokenController,
+  adminController,
+  updateSkaterController
+  }
