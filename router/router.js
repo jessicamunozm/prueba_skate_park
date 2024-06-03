@@ -1,16 +1,13 @@
 import express from "express";
 
-import homeController from "../controllers/homeController.js"
-import registroController from "../controllers/registroController.js"
-import {addSkaterController, getSkaterController} from "../controllers/skatersController.js"
-import loginController from "../controllers/loginController.js"
+import {homeController, loginController, registroController, addSkaterController, getSkaterController, skaterLoginController} from "../controllers/controllers.js"
 
 const router = express.Router();
 
 router.get('/', getSkaterController)
 router.get('/registro', registroController)
 router.post('/skaters', addSkaterController)
-router.get('/login', loginController)
+router.get('/login', skaterLoginController)
 //router.get('/skaters', getSkaterController)
 
 

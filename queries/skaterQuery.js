@@ -20,4 +20,13 @@ console.log(result.rows)
 return result.rows
 }
 
-export  {addSkaterQuery, getSkaterQuery}
+const tokenSkaterQuery = async(email, password) => {
+ const consulta = {
+    text: `SELECT * FROM skaters WHERE email = $1 AND password = $2`,
+    values: [email, password],
+ }
+    const result =  await pool.query(consulta)
+    return result.rows
+}
+
+export  {addSkaterQuery, getSkaterQuery, tokenSkaterQuery}
